@@ -1,7 +1,7 @@
 <div class="log mt-4 px-2">
     <div class="info left" style="float: left;">
         <div class="map" id="map">
-            <img id="img_geo" src="android-chrome-192x192.png" data-src="" alt="alt">
+           <!-- <img id="img_geo" src="android-chrome-192x192.png" data-src="" alt="alt">-->
         </div>
     </div>
     <div class="info right" style="float: right;">
@@ -89,6 +89,8 @@
         }, 5000);
     }, false);
 
+
+    toggleFullScreen('canvas');
 
     function updateTime() {
         var currentdate = new Date();

@@ -95,7 +95,7 @@ function updateMAP() {
         } else {
             getPosition(pos);
 
-            if (typeof map.setZoom != 'undefined') map.setZoom(config.map.zoom);
+        //    if (typeof map.setZoom != 'undefined') map.setZoom(config.map.zoom);
         }
 
     }
