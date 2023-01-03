@@ -1,0 +1,181 @@
+<div class="log mt-4 px-2">
+    <div class="info left" style="float: left;">
+        <div class="map" id="map">
+            <img id="img_geo" src="android-chrome-192x192.png" data-src="" alt="alt">
+        </div>
+    </div>
+    <div class="info right" style="float: right;">
+        <div class="date" id="date"></div>
+        <div class="log" id="log"></div>
+    </div>
+</div>
+<div class="hud">
+    <canvas id="canvas"></canvas>
+</div>
+<script src="teslahud.js"></script>
+<script src="config.js"></script>
+<div class="menu">
+    <div class="navigation">
+        <ul>
+            <li class="list">
+                <a href="index.html">
+                    <span class="icon"><ion-icon name="planet-outline"></ion-icon></span>
+                    <span class="text">home</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="map.html">
+                    <span class="icon"><ion-icon name="map-outline"></ion-icon></span>
+                    <span class="text">map</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="router.html">
+                    <span class="icon"><ion-icon name="navigate-circle-outline"></ion-icon></span>
+                    <span class="text">router</span>
+                </a>
+            </li>
+            <li class="list active">
+                <a href="#">
+                    <span class="icon"><ion-icon name="speedometer-outline"></ion-icon></span>
+                    <span class="text">meter</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
+                    <span class="text">note</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
+                    <span class="text">photo</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><ion-icon name="videocam-outline"></ion-icon></span>
+                    <span class="text">photo</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="javascript:void(0);" onclick="toggleFullScreen(canvas);">
+                    <span class="icon"><ion-icon name="videocam-outline"></ion-icon></span>
+                    <span class="text">photo</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<link rel="stylesheet" href="menu.css">
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+    var i = 0;
+    document.addEventListener('DOMContentLoaded', function () {
+        setInterval(function () {
+            //console.log(i++);
+            drawSpeedo(config.map.speed, config.meter.gear, config.meter.rpm, config.meter.maxseed);
+
+        }, config.map.timereset)
+
+        setInterval(function () {
+            updateTime();
+            updateMap();
+        }, 5000);
+    }, false);
+
+
+    function updateTime() {
+        var currentdate = new Date();
+        var datetime = currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + " | "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes();
+        //+ currentdate.getSeconds();
+
+        document.getElementById('date').innerText = datetime;
+    }
+    function updateMap() {
+        updateMAP();
+        mapIt();
+    }
+
+    function mapIt(myLatitude = config.map.lat, myLongitude = config.map.long) {
+        var urlGoogle = 'https://maps.googleapis.com/maps/api/staticmap?maptype='+config.map.type+'&size=' + config.map.width + 'x' + config.map.height + '&zoom=' + config.map.zoom + '&key=' + config.map.key + '&center=' + myLatitude + ',' + myLongitude + '&markers=icon:'+config.map.maker+'|'+myLatitude+','+myLongitude;
+        var img_geo = document.getElementById('img_geo');
+        img_geo.src = urlGoogle;
+    }
+</script>
+
+<style>
+    .log, .hud, canvas {
+        user-select: none;
+        pointer-events: none;
+    }
+
+    .log {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999999;
+        left: 0;
+        bottom: 0;
+        top: 0;
+    }
+    #log{
+        bottom: 10%;
+    }
+
+
+    html, body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: rgb(2, 0, 36);
+        background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    }
+
+    canvas {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .mt-4 {
+        margin-top: 1em;
+    }
+
+    .px-2 {
+        /*padding: 0 2em;*/
+    }
+
+    .info {
+        color: #fff;
+        font-size: 1.5em;
+        font-family: "Josefin Sans", sans-serif;
+        text-shadow: #666666;
+        text-transform: uppercase;
+
+    }
+
+    .info.right {
+        margin-right: 2em;
+    }
+
+    .info.left {
+        width: 30%;
+        height: 50%;
+        z-index: 2;
+    }
+
+
+</style>
