@@ -421,7 +421,7 @@ footer {
     display: block;
 }
 
-canvas {
+#canvas {
     height: 30em;
     opacity: .75;
     bottom: 3em;
