@@ -2,7 +2,7 @@
 .navigation {
     opacity: 1;
     width: 100%;
-    height: auto;
+    height: 7em;
     display: flex;
     justify-content: center;
     position: relative;
@@ -19,15 +19,16 @@
     background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
     border-radius: 10px;
     opacity: .5;
+    margin-left: 50%;
 }
 
 .navigation ul {
     position: relative;
     display: flex;
-    width: auto;
+    width: 50%;
     padding: .25em;
-    margin: .5em;
-    flex-direction: column-reverse;
+    margin: 0 auto;
+    flex-direction: row;
     flex-wrap: nowrap;
 }
 
@@ -36,8 +37,8 @@
     list-style: none;
     width: 2em;
     z-index: 1;
-    padding: 0;
-    margin: 0;
+    padding: 1em;
+    margin: 1em;
 }
 
 .navigation ul li a {
@@ -351,7 +352,8 @@ footer {
     position: absolute;
     bottom: 0;
     z-index: 9999;
-    right: 0;
+    left: 0;
+    display: block;
 
 }
 
@@ -426,6 +428,7 @@ canvas {
     position: fixed;
     left: 0;
     z-index: 9999999;
+    display: none !important;
 }
 
 .ldBar {
@@ -533,4 +536,11 @@ canvas {
 
 .leaflet-top {
     top: 5em;
+}
+
+#map.upscale{
+    transform: scale(2);
+}
+#map.reverse{
+    transform: scale(-1);
 }
