@@ -892,6 +892,74 @@ function showing_endline() {
     }
 }
 
+var is_reverseMode = false;
+function reverseMode()
+{
+    if (is_reverseMode == false) {
+        is_reverseMode = true;
+        document.getElementById('map').classList.add('reverse');
+        document.getElementById('rever_phone').classList.add('red');
+    } else {
+        is_reverseMode = false;
+        document.getElementById('rever_phone').classList.remove('red');
+        document.getElementById('map').classList.remove('reverse');
+    }
+}
+var is_mapUPscale = false;
+function mapUPscaleMode()
+{
+    if (is_mapUPscale == false) {
+        is_mapUPscale = true;
+        document.getElementById('map').classList.add('upscale');
+        document.getElementById('map_upScle').classList.add('red');
+    } else {
+        is_mapUPscale = false;
+        document.getElementById('map_upScle').classList.remove('red');
+        document.getElementById('map').classList.remove('upscale');
+    }
+}
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+function toggleFullScreen(){
+   
+
+
+
+    let elem = document.querySelector("body");
+
+    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
+        if (elem.requestFullScreen) {
+            elem.requestFullScreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }else if (vid.webkitEnterFullscreen) {
+            elem.webkitEnterFullscreen(); //for iphone this code worked
+         }
+        // document.addEventListener("mousedown", toggleFullScreen);
+
+    } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+        else if (document.fullscreenElement) {
+            document.exitFullscreen()
+              .then(() => console.log("Document Exited from Full screen mode"))
+              .catch((err) => console.error(err))
+          } else {
+            document.documentElement.requestFullscreen();
+          }
+        //  document.removeEventListener("mousedown", toggleFullScreen);
+    }
 }
