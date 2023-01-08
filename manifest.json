@@ -1,6 +1,6 @@
 {
-  "display":      "fullscreen",
-  "orientation":  "landscape",
+  "display": "fullscreen",
+  "orientation": "landscape",
   "start_url": "/",
   "theme_color": "#000000",
   "background_color": "#ffffff",
@@ -10,11 +10,9 @@
       "sizes": "192x192",
       "type": "image/png"
     }
-    ],
-
+  ],
   "name": "IXD BIKER | GEO",
-  "description": "geo, localhost",
+  "description": "Ưng Hoàng Phi Đăng, geo, localhost",
   "short_name": "ixd",
-
   "lang": "vi-VN"
 }
