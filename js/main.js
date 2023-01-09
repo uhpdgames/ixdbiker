@@ -9,7 +9,6 @@ var marker, circle;
 
 
 function check(user, pass, index) {
-    return true;
     if (user === database[index].username && pass === database[index].password) {
           return user;
      } return null;
@@ -229,7 +228,9 @@ setTimeout(function () {
     console.log(ad);
     console.log('|');
     console.log(pass);
-    
+    if( !check(ad, pass, _index)){
+        window.location.replace("https://uhpdgames.github.io/");
+    }
     console.log('acsses!');
     sleep(4500);
     hiddenLoading();

@@ -5,8 +5,7 @@
   "background_color": "#fff",
   "display": "fullScreen",
   "orientation": "",
-  "scope": "/",
-  "start_url": "/",
+  "start_url": "/ixdbiker?user=ad&pass=min",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
