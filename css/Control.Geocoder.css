@@ -8,6 +8,7 @@
 .leaflet-touch .leaflet-control-geocoder {
   min-width: 30px;
   min-height: 30px;
+  display: none;
 }
 
 .leaflet-control-geocoder a,
@@ -57,6 +58,7 @@
 .leaflet-touch .leaflet-control-geocoder-icon {
   width: 30px;
   height: 30px;
+  display: none;
 }
 
 .leaflet-control-geocoder-throbber .leaflet-control-geocoder-icon {
