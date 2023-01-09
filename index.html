@@ -20,7 +20,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
-    <title>IXD BIKER | @2023</title>
+    <title>IXD BIKER | {ƯNG HOÀNG PHI ĐĂNG}| UHDPGAMES @2023</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/leaflet.css"/>
 
@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/leaflet-routing-machine.css"/>
     <link rel="stylesheet" href="css/L.Control.Locate.min.css"/>
     <link rel="stylesheet" href="css/Control.Geocoder.css"/>
-    <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/leaflet-search.css">
 
@@ -98,7 +97,7 @@
             </li>
             <li class="list">
                 <a href="javascript:void(0);" onclick="updateTitleDefault();">
-                <span class="icon">
+                <span class="icon blue">
                     <ion-icon id="icon-mapdefalut" class="mapdefalut-off"></ion-icon>
                 </span>
 
@@ -156,21 +155,26 @@
 
             <li class="list ">
                 <a href="javascript:void(0);" onclick="showing_weather();">
-                <span class="icon" id="icon-weather">
+                <span class="icon red" id="icon-weather">
                     <ion-icon name="sunny-outline"></ion-icon>
                 </span>
                     <span class="text">HAGIANG</span>
                 </a>
             </li>
             <!--todo menu-->
-            <li class="list active">
+            <li class="list">
                 <a href="javascript:void(0)" onclick="reverseMode();">
-                    <ion-icon id="rever_phone" name="camera-reverse-outline"></ion-icon>
+                    <span class="icon">
+                        <ion-icon id="rever_phone" name="camera-reverse-outline"></ion-icon>
+                    </span>
                     <span class="text">toggle Full</span></a>
             </li>
-            <li class="list active">
+            <li class="list">
                 <a href="javascript:void(0)" onclick="mapUPscaleMode();">
-                    <ion-icon id="map_upScle" name="arrow-up-circle-outline"></ion-icon>
+                    <span class="icon">
+                        <ion-icon id="map_upScle" name="arrow-up-circle-outline"></ion-icon>
+                    </span>
+                    
                     <span class="text">toggle Full</span></a>
             </li>
             <li class="list active">
@@ -211,6 +215,7 @@
 <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script defer src="js/loading-bar.min.js"></script>
+<script src="js/teslahud.js"></script>
 <script defer src="js/main.js"></script>
 <script type="module">
     // Import the functions you need from the SDKs you need

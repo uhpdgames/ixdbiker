@@ -1,2 +1,0 @@
-# ixdbiker
-cli app

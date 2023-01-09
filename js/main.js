@@ -1,3 +1,13 @@
+
+//watch
+
+let id;
+let target;
+let options;
+
+var marker, circle;
+
+
 function check(user, pass, index) {
     if (user === database[index].username && pass === database[index].password) {
           return user;
@@ -238,14 +248,6 @@ function findGetParameter(parameterName) {
     return result;
 }
 
-//watch
-
-let id;
-let target;
-let options;
-
-var marker, circle;
-
 function getPosition() {
 
 
@@ -400,6 +402,22 @@ function removeElementsByClass(className) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    drawSpeedo();
+    function callback_Current(position){
+        config.map.lat = position.coords.latitude;
+        config.map.long = position.coords.longitude;
+        config.map.speed = position.coords.speed;
+
+        updateMeter();
+    }
+    
+    function setup_meter(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(callback_Current, function(){}, options);
+        }
+    }
+
+    setInterval(setup_meter, 50);
     setInterval(updateMAP, 5000);
     setInterval(updateWeather, 60000);
     setInterval(function () {
@@ -574,6 +592,7 @@ function showing_lichtrinh() {
         removeElementsByClass('awesome-marker-icon-red');
         removeElementsByClass('awesome-marker-icon-orange');
         removeElementsByClass('awesome-marker-shadow');
+        removeElementsByClass('leaflet-popup');
 
         document.getElementById('icon-lich-trinh').classList.remove('red');
     }
@@ -856,11 +875,14 @@ function showing_weather() {
         is_showweather = true;
         weather = undefined;
         document.getElementById('icon-weather').innerHTML = '<ion-icon name="thunderstorm-outline"></ion-icon>';
+        document.getElementById('icon-weather').classList.add('blue');
+        document.getElementById('icon-weather').classList.remove('red');
     } else {
         updateWeather();
         is_showweather = false;
         document.getElementById('icon-weather').innerHTML = '<ion-icon name="sunny-outline"></ion-icon>';
-
+        document.getElementById('icon-weather').classList.remove('blue');
+        document.getElementById('icon-weather').classList.add('red');
     }
 }
 

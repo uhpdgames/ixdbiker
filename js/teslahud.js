@@ -87,8 +87,7 @@ function drawSpeedo() {
     if(config.map.is_showing_meter === false){
         return false;
     }
-    else{
-    }
+     
     speed = config.map.speed; gear = config.meter.gear; rpm = config.meter.rpm; topSpeed = config.meter.maxseed;
     if (speed == undefined ) {
         //|| speed === 0
