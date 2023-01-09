@@ -144,7 +144,8 @@
     bottom: 0;
 }
 .leaflet-left {
-    left: 0;
+    right: 1em;
+    top: 14em !important;
 }
 .leaflet-control {
     float: left;

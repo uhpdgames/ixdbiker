@@ -403,12 +403,14 @@ function removeElementsByClass(className) {
 
 document.addEventListener('DOMContentLoaded', function () {
     drawSpeedo();
+
     function callback_Current(position){
         config.map.lat = position.coords.latitude;
         config.map.long = position.coords.longitude;
         config.map.speed = position.coords.speed;
 
         updateMeter();
+        drawSpeedo();
     }
     
     function setup_meter(){
@@ -940,6 +942,7 @@ function mapUPscaleMode()
         document.getElementById('map').classList.remove('upscale');
     }
 }
+ 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
