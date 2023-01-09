@@ -19,7 +19,7 @@
     position: relative;
     display: flex;
     width: auto;
-    height: 24rem;
+    height: 24.5em;
     padding: .25em;
     margin: 0 auto;
     flex-direction: column-reverse;
@@ -419,13 +419,29 @@ footer {
     text-align: left;
     margin-left: .2em;
     position: relative;
+
+
+      display: block;
+      color: darkgreen;
+      width: 100%;
+      text-align: left;
+      margin-left: .2em;
+      position: relative;
+      break-after: ;
+      height: 3rem;
+      break-after: ;
+      word-break: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
 }
 .log#log-address::before{
     background-color: #666666;
     opacity: .25;
     width: 100%;
     height: 100%;
-    content: " ";
     position:absolute;
 }
 

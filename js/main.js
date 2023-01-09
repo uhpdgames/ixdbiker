@@ -217,7 +217,7 @@ setTimeout(function () {
         }
     };
 
-    //map.addControl(new L.Control.Search(mobileOpts));
+    map.addControl(new L.Control.Search(mobileOpts));
     //view source of search.php for more details
 
     map.addControl(new L.Control.Zoom());
