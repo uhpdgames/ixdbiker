@@ -9,6 +9,7 @@ var marker, circle;
 
 
 function check(user, pass, index) {
+    return true;
     if (user === database[index].username && pass === database[index].password) {
           return user;
      } return null;
@@ -323,6 +324,9 @@ function updateGEO(position) {
     config.map.long = position.coords.longitude
     config.map.accuracy = position.coords.accuracy
     config.map.speed = position.coords.speed;
+    if(config.map.speed > 0){
+        config.map.speed *= 1.6099;
+    }
 
     updateMeter();
 }
