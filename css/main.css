@@ -521,7 +521,7 @@ footer {
 
 #preloader {
 
-    background: #000 url('../images/loader.gif') no-repeat center center;
+    background: #000 url('https://uhpdgames.github.io/ixdbiker/images/loader.gif') no-repeat center center;
     height: 100vh;
     width: 100%;
     position: fixed;
