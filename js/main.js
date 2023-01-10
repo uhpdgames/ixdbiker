@@ -1052,18 +1052,23 @@ var is_tools_show = false;
 function update_tools(){
     var d = document.querySelector('.leaflet-top.leaflet-left');
     var f = document.querySelector('footer');
-    var t = document.querySelector('.hud-text_content.text-running')
+    var t = document.querySelector('.hud-text_content.text-running');
+    var c = document.querySelector('.hud.comp');
     if(is_tools_show === false){ 
         d.className = 'leaflet-top leaflet-left hidden';  
         f.className = 'hidden';
+        c.className = 'hud comp hidden';
         t.className = 'hud-text_content text-running hidden';
         document.getElementById('canvas').classList.add('hidden');
+        document.getAnimations('log').classList.add('hidden');
         is_tools_show = true;
     }else{ 
         d.className = 'leaflet-top leaflet-left';
         f.className = 'footer';
+        c.className = 'hud comp';
         t.className = 'hud-text_content text-running';
         document.getElementById('canvas').classList.remove('hidden');
+        document.getAnimations('log').classList.remove('hidden');
         is_tools_show = false;
         mylog(''); 
     }
