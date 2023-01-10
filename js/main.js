@@ -802,7 +802,7 @@ async function getLocalName(lat = null, lng = null) {
     if(is_rec === true && config.map.place_id !=0 && config.map.place_id != code.global_code){
         config.map.place_id = code.global_code;
 
-        write_lat_lng(config.map.place_id);
+        write_lat_lng(config.map.place_id, str);
     }
 
     document.getElementById('log-address').innerText = str;
@@ -999,11 +999,12 @@ function currentDateTime(){
     return d.toLocaleString('vi-VN');
 }
 
-function write_lat_lng(place_id) {
+function write_lat_lng(place_id, local) {
     firebase.database().ref('google_geo/' + place_id).set({
         latitude:config.map.lat,
         longitude:config.map.long,
         speed:config.map.speed,
-        time: currentDateTime,
+        time: currentDateTime(),
+        local:local,
     });
   }
