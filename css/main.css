@@ -289,6 +289,8 @@ ion-icon {
     height: 2.5em;
 
     z-index: 999999;
+    user-select: none;
+    pointer-events: none;
 }
 
 .text-running {
@@ -421,6 +423,8 @@ footer {
     background: blue;
     width: fit-content;
     height: fit-content;
+    user-select: none;
+    pointer-events: none;
 }
 
 .log#log-address {
@@ -429,7 +433,8 @@ footer {
     text-align: left;
     margin-left: .2em;
     position: relative;
-
+    user-select: none;
+    pointer-events: none;
 
       display: block;
       color: snow;
@@ -515,6 +520,8 @@ footer {
     top: 6rem;
     position: fixed;
     left: 0;
+    user-select: none;
+    pointer-events: none;
 }
 
 .leaflet-map-pane svg {

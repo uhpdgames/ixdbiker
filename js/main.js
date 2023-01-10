@@ -835,10 +835,11 @@ function onMapClick(e) {
       map.panTo(new L.LatLng(position.lat, position.lng));
 
       getLocalName();
-      sleep(250);
+      sleep(500);
 
-      var my_place = config.map.place_id + ' |'+position.lat +','+position.lng ;
-      write_bookmark(my_place, position.lat, position.lng);
+      if(config.map.place_id !=0){
+        write_bookmark(config.map.place_id, position.lat, position.lng);
+      }
     });
     map.addLayer(marker);
 
@@ -1036,13 +1037,18 @@ function rec_trigger(){
 var is_tools_show = false;
 function update_tools(){
     var d = document.querySelector('.leaflet-top.leaflet-left');
+    var f = document.querySelector('footer');
+    var t = document.querySelector('.hud-text_content.text-running')
     if(is_tools_show === false){ 
         d.className = 'leaflet-top leaflet-left hidden';  
+        f.className = 'hidden';
+        t.className = 'hud-text_content text-running hidden';
         is_tools_show = true;
     }else{ 
         d.className = 'leaflet-top leaflet-left';
-         is_tools_show = false;
-        
+        f.className = 'footer';
+        t.className = 'hud-text_content text-running';
+        is_tools_show = false;
         mylog(''); 
     }
 }
