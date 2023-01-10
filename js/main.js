@@ -301,21 +301,25 @@ var uu = 0;
 
 function updateMAP() {
     function success(pos) {
-        const crd = pos.coords;
+        const crd = pos.coords || {};
+        const alt = crd.altitude || 0;
+        const hea = crd.heading || 0;
 
         if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
             navigator.geolocation.clearWatch(id);
         } else {
             if(crd){
-
-
                 let str = '';
-
-                str += '🏃🏻 Altitude: ' + crd.altitude || 0 + "\n";
-                str += '🏌🏻 Heading: ' + crd.heading||0 + "\n";
-               
+                if(alt){
+                    str += '🏃🏻 Altitude: ' + parseFloat(alt).toFixed(2) + "\n";
+                }
+            
+                if(hea){
+                    str += '🏌🏻 Heading: ' + parseFloat(hea).toFixed(2) + "\n";
+                    document.getElementById('n-sign').style.transform = "rotate("+hea+"deg)";
+                }
+        
                 mylog(str);
-    
                 updateGEO(pos);
     
                 if (config.map.auto_zoom) {

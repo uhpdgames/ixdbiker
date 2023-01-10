@@ -466,6 +466,23 @@ footer {
 .ldBarEnable {
     display: block;
 }
+.hud.comp{
+    left: 5px;
+    top: 145px;
+    width: fit-content;
+    height: fit-content;
+    background: transparent;
+  
+}
+.hud.hud.comp .bg{
+    opacity: .7;
+}
+.hud.comp #n-sign{
+    position: absolute;
+    left: 25%;
+    top: 25%;
+    transform: rotate(0deg);
+}
 
 #canvas {
     transform: translateX(20%);
