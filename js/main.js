@@ -306,12 +306,22 @@ function updateMAP() {
         if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
             navigator.geolocation.clearWatch(id);
         } else {
+            if(crd){
 
-            updateGEO(pos);
 
-            if (config.map.auto_zoom) {
-                getPosition();
-                map.setZoom(config.map.zoom);
+                let str = '';
+
+                str += '🏃🏻 Altitude: ' + crd.altitude || 0 + "\n";
+                str += '🏌🏻 Heading: ' + crd.heading||0 + "\n";
+               
+                mylog(str);
+    
+                updateGEO(pos);
+    
+                if (config.map.auto_zoom) {
+                    getPosition();
+                    map.setZoom(config.map.zoom);
+                }
             }
         }
 
@@ -1043,11 +1053,13 @@ function update_tools(){
         d.className = 'leaflet-top leaflet-left hidden';  
         f.className = 'hidden';
         t.className = 'hud-text_content text-running hidden';
+        document.getElementById('canvas').classList.add('hidden');
         is_tools_show = true;
     }else{ 
         d.className = 'leaflet-top leaflet-left';
         f.className = 'footer';
         t.className = 'hud-text_content text-running';
+        document.getElementById('canvas').classList.remove('hidden');
         is_tools_show = false;
         mylog(''); 
     }
