@@ -8,6 +8,9 @@ var saveStore = {'test:':1};
 
 var marker, circle;
 
+config.map.maker = 'https://uhpdgames.github.io/ixdbiker/images/vemon.png';
+config.map.maker_vemon = 'https://uhpdgames.github.io/ixdbiker/images/vemon.png';
+config.map.maker_shadow = 'https://uhpdgames.github.io/ixdbiker/images/marker-shadow.png';
 
 function check(user, pass, index) {
     if (user === database[index].username && pass === database[index].password) {
@@ -236,7 +239,8 @@ setTimeout(function () {
     sleep(4500);
     hiddenLoading();
 
-   
+    map.on('click', onMapClick);
+
 }, 1000);
 
 const firebaseConfig = {
@@ -315,7 +319,7 @@ function updateMAP() {
 
     function error(err) {
 
-        mylog(`ERROR(${err.code}): ${err.message}`)
+        mylog(`⛽ (${err.code}): ${err.message}⛔`)
         //console.error();
     }
 
@@ -365,9 +369,7 @@ function updateMeter() {
 
 function mylog(data = '') {
     var log = document.getElementById('log');
-    if (typeof log != 'undefined') {
-        log.innerHTML = data;
-    }
+    log.innerHTML = data;
 }
 
 var is_google_statellite = false;
@@ -448,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setInterval(function () {
         weather = undefined;
-        document.getElementById('log').innerHTML = '';
+        mylog('');
     }, 50000)
 }, false);
 
@@ -495,11 +497,13 @@ function update_auto_zoom_map() {
     if (config.map.auto_zoom === false) {
 
         document.getElementById('icon-zoom').classList.add('zoom-in');
+        document.getElementById('icon-zoom').classList.add('animate_b');
         document.getElementById('icon-zoom').classList.remove('zoom-off');
         config.map.auto_zoom = true;
         getPosition();
     } else {
         document.getElementById('icon-zoom').classList.add('zoom-off');
+        document.getElementById('icon-zoom').classList.remove('animate_b');
         document.getElementById('icon-zoom').classList.remove('zoom-in');
         config.map.auto_zoom = false
     }
@@ -714,7 +718,7 @@ async function updateWeather_2(lat, long) {
         case 1:
         case 2:
         case 3:
-            str = 'Mây và nắng';
+            str = 'Mây và ⛅nắng';
             break;
         case 45:
         case 48:
@@ -723,47 +727,47 @@ async function updateWeather_2(lat, long) {
         case 51:
         case 53:
         case 55:
-            str = 'Mưa phùn: Cường độ nhẹ, trung bình và dày đặc';
+            str = '☔Mưa⛈ phùn: Cường độ nhẹ, trung bình và dày đặc';
             break;
         case 56:
         case 57:
-            str = 'Mưa phùn băng giá: Cường độ nhẹ và dày đặc';
+            str = '☔Mưa⛈ phùn băng giá: Cường độ nhẹ và dày đặc';
             break;
         case 61:
         case 63:
         case 65:
-            str = 'Mưa: Cường độ nhẹ, trung bình và nặng hạt';
+            str = '☔Mưa⛈: Cường độ nhẹ, trung bình và nặng hạt';
             break;
         case 66:
         case 67:
-            str = 'Mưa to: Cường độ nhẹ và gió mạnh';
+            str = '☔Mưa⛈ to: Cường độ nhẹ và gió mạnh';
             break;
         case 71:
         case 73:
         case 75:
-            str = 'Tuyết rơi: Cường độ nhẹ, trung bình và nặng';
+            str = '⛄Tuyết rơi: Cường độ nhẹ, trung bình và nặng';
             break;
         case 77:
-            str = 'hạt tuyết';
+            str = '⛇hạt tuyết';
             break;
         case 80:
         case 81:
         case 82:
-            str = 'Mưa rào: Nhẹ, vừa phải và dữ dội';
+            str = '☔Mưa⛈ rào: Nhẹ, vừa phải và dữ dội';
             break;
         case 85:
         case 86:
-            str = 'Mưa tuyết nhẹ và nặng hạt';
+            str = '☔Mưa⛈ tuyết nhẹ và nặng hạt';
             break;
         case 95:
-            str = 'Giông bão: Nhẹ hoặc trung bình';
+            str = '⚡Giông bão: ⛈Nhẹ hoặc trung bình';
             break;
         case 96:
         case 99:
-            str = 'Giông bão với mưa đá nhỏ và nặng';
+            str = '⚡Giông bão với ☔ mưa⛈ đá nhỏ và nặng';
             break;
         default:
-            str = 'Nắng tốt';
+            str = '🏍Nắng tốt⛅⛅';
     }
 
     document.getElementById('log-weather').innerText = str;
@@ -783,7 +787,7 @@ async function updateWeather_2(lat, long) {
 
 
 config.map.place_id = 0;
-
+config.map.google_geo_map = '';
 async function getLocalName(lat = null, lng = null) {
 
     if (lat == null) lat = config.map.lat;
@@ -793,11 +797,14 @@ async function getLocalName(lat = null, lng = null) {
     const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=' + config.map.key;
     const response = await fetch(url);
     const data = await response.json();
-    sleep(500);
+    sleep(125);
 
     const code = data.plus_code || {};
 
     var str = code.compound_code || "";
+    config.map.google_geo_map = str;
+
+    config.map.place_id  = code.global_code;
 
     if(is_rec === true && config.map.place_id !=0 && config.map.place_id != code.global_code){
         config.map.place_id = code.global_code;
@@ -809,6 +816,36 @@ async function getLocalName(lat = null, lng = null) {
     ldBarEnable.set(100, true);
 }
 
+function onMapClick(e) {
+    if(is_save_mode === false){
+        return false;
+    }
+
+    var redMarker = L.AwesomeMarkers.icon({
+        'icon':'marker',
+        'iconColor':'white',
+        'makerColor':"cadetblue",
+        'prefix':'fa',
+    });    
+    var marker = new L.marker(e.latlng, {draggable:'true', autoPan: 'false'});
+    marker.on('dragend', function(event){
+      var marker = event.target;
+      var position = marker.getLatLng();
+      marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+      map.panTo(new L.LatLng(position.lat, position.lng));
+
+      getLocalName();
+      sleep(250);
+
+      var my_place = config.map.place_id + ' |'+position.lat +','+position.lng ;
+      write_bookmark(my_place, position.lat, position.lng);
+    });
+    map.addLayer(marker);
+
+   // 
+};
+
+  
 async function updateWeather() {
  
     ldBarEnable.set(
@@ -986,11 +1023,46 @@ function rec_trigger(){
     if(is_rec === false){
 
         document.getElementById('btn-rec').classList.add('red');
+        document.getElementById('btn-rec').classList.add('animate_b');
         is_rec = true;
     }else{
 
         document.getElementById('btn-rec').classList.remove('red');
+        document.getElementById('btn-rec').classList.remove('animate_b');
         is_rec = false;
+    }
+}
+
+var is_tools_show = false;
+function update_tools(){
+    var d = document.querySelector('.leaflet-top.leaflet-left');
+    if(is_tools_show === false){ 
+        d.className = 'leaflet-top leaflet-left hidden';  
+        is_tools_show = true;
+    }else{ 
+        d.className = 'leaflet-top leaflet-left';
+         is_tools_show = false;
+        
+        mylog(''); 
+    }
+}
+
+var is_save_mode = false;
+function saveBookMark(){
+    if(is_save_mode === false){
+
+        document.getElementById('save_bookmark').classList.add('red');
+        document.getElementById('save_bookmark').classList.add('animate_b');
+        is_save_mode = true;
+    }else{
+
+        document.getElementById('save_bookmark').classList.remove('red');
+        document.getElementById('save_bookmark').classList.remove('animate_b');
+        is_save_mode = false;
+        
+        mylog('');
+        removeElementsByClass('leaflet-marker-draggable');
+        removeElementsByClass('leaflet-marker-shadow');
     }
 }
 
@@ -1006,5 +1078,41 @@ function write_lat_lng(place_id, local) {
         speed:config.map.speed,
         time: currentDateTime(),
         local:local,
-    });
+    },(error) => {
+        if (error) {
+            mylog('⛽Lưu hành trình thất bại: ' + place_id);
+        } else {
+          mylog('⚡Đã lưu hành trình vị trí: ' + place_id);
+        }
+      });
+  }
+ 
+  function write_bookmark(place_id, lat, lng){
+    //var newPostKey = firebase.database().ref().child('google_bookmark').push().key;
+ 
+    var postData ={
+        latitude:lat,
+        longitude:lng,
+        time: currentDateTime(),
+        local:config.map.google_geo_map || "",
+        global_code:config.map.place_id || 0
+    };
+ 
+    var updates = {};
+    updates['/google_bookmark/' + place_id] = postData;
+  
+    return firebase.database().ref().update(updates, (error) => {
+        if (error) {
+            mylog('Lưu thất bại! : ' + place_id);
+        } else {
+          mylog('Lưu thành công! : ' + place_id);
+        }
+      });
+    //firebase.database().ref('google_bookmark/' + place_id).set();
+  }
+  
+
+  function click_loading(){
+    document.getElementById('main_conn').style.display = 'block';
+    hiddenLoading();
   }

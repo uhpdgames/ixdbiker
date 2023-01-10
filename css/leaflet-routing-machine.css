@@ -32,6 +32,11 @@
     max-height: 320px;
     overflow-y: auto;
     transition: all 0.2s ease;
+    font-family: inherit;
+    font-weight: normal;
+    font-variant: discretionary-ligatures;
+    font-size: medium;
+    line-height: 1.75;
 }
 
 .leaflet-control-container .leaflet-routing-container-hide .leaflet-routing-alt, 
@@ -74,7 +79,7 @@
 }
 
 .leaflet-routing-icon {
-    background-image: url('../images/leaflet.routing.icons.png');
+    background-image: url('https://uhpdgames.github.io/ixdbiker/images//leaflet.routing.icons.png');
     -webkit-background-size: 240px 20px;
     background-size: 240px 20px;
     background-repeat: no-repeat;
@@ -223,12 +228,13 @@
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn {
     position: relative;
-    left: 4px;
-    top: 4px;
+    left: 0;
+    top: 0;
     display: block;
     width: 26px;
-    height: 23px;
-    background-image: url('routing-icon.png');
+    height: 26px;
+    background-image: url('https://uhpdgames.github.io/ixdbiker/images/routing-icon.png');
+    background-size: cover;
 }
 
 .leaflet-routing-container-hide .leaflet-routing-collapse-btn:after {
