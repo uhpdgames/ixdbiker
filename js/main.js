@@ -1,6 +1,9 @@
 
 //watch
+const bigdata = {
+    key: 'bdc_0b2b8d2a098444d4adcc44c15b25c483',
 
+}
 let id;
 let target;
 let options;
@@ -1070,7 +1073,7 @@ function update_tools(){
         document.getElementById('canvas').classList.remove('hidden');
         document.getAnimations('log').classList.remove('hidden');
         is_tools_show = false;
-        mylog(''); 
+        //mylog(''); 
     }
 }
 
@@ -1142,4 +1145,44 @@ function write_lat_lng(place_id, local) {
   function click_loading(){
     document.getElementById('main_conn').style.display = 'block';
     hiddenLoading();
+  }
+
+  async function bd_city(){
+    url = 'https://api.bigdatacloud.net/data/reverse-geocode?latitude=-34.93129&longitude=138.59669&localityLanguage=en&key='+bigdata.key;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    const plusCode = data.plusCode || 0;
+    const city = data.city || '';
+
+  }
+
+  var rs ,ss
+  async function test_C(){
+    
+    /* Initialise Reverse Geocode API Client */
+    var reverseGeocoder=new BDCReverseGeocode();
+    
+    /* Get the current user's location information, based on the coordinates provided by their browser */
+    /* Fetching coordinates requires the user to be accessing your page over HTTPS and to allow the location prompt. */
+    reverseGeocoder.getClientLocation(function(result) {
+        console.log(result);
+    });
+
+    /* Get the administrative location information using a set of known coordinates */
+    reverseGeocoder.getClientLocation({
+        latitude: -33.8688,
+        longitude: 151.2093,
+    },function(result) {
+      rs=result;//  console.log(result);
+    });
+
+    /* You can also set the locality language as needed */
+    reverseGeocoder.localityLanguage='vi';
+
+    /* Request the current user's coordinates (requires HTTPS and acceptance of prompt) */
+    reverseGeocoder.getClientCoordinates(function(result) {
+    ss=result;    console.log(result);
+    });
+
   }
