@@ -811,25 +811,37 @@ async function getLocalName(lat = null, lng = null) {
     if (lng == null) lng = config.map.long;
 
     ldBarEnable.set(0, false);
-    const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=' + config.map.key;
+    //const url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lng + '&key=' + config.map.key;
+    //const response = await fetch(url);
+    //const data = await response.json();
+    
+    //lat = lat || config.map.lat;
+    //lng = lng || config.map.lng;
+
+    url = 'https://api.bigdatacloud.net/data/reverse-geocode?latitude='+lat+'&longitude='+lng+'&localityLanguage=vi&key='+bigdata.key;
     const response = await fetch(url);
     const data = await response.json();
+
+    const code_ = data.plusCode || 0;
+    const str = data.city || '';
+
+
     sleep(125);
 
-    const code = data.plus_code || {};
+    //const code = data.plus_code || {};
 
-    var str = code.compound_code || "";
+    //var str = code.compound_code || "";
     config.map.google_geo_map = str;
 
-    config.map.place_id  = code.global_code;
+    config.map.place_id  = code_;
 
-    if(is_rec === true && config.map.place_id !=0 && config.map.place_id != code.global_code){
-        config.map.place_id = code.global_code;
+    if(is_rec === true && config.map.place_id !=0 && config.map.place_id != code_){
+        config.map.place_id = code_;
 
         write_lat_lng(config.map.place_id, str);
     }
 
-    document.getElementById('log-address').innerText = str;
+    document.getElementById('log-address').innerText = data.plusCode + ' | ' + str;
     ldBarEnable.set(100, true);
 }
 
@@ -1063,7 +1075,7 @@ function update_tools(){
         c.className = 'hud comp hidden';
         t.className = 'hud-text_content text-running hidden';
         document.getElementById('canvas').classList.add('hidden');
-        document.getAnimations('log').classList.add('hidden');
+        document.getElementById('log').classList.add('hidden');
         is_tools_show = true;
     }else{ 
         d.className = 'leaflet-top leaflet-left';
@@ -1071,7 +1083,7 @@ function update_tools(){
         c.className = 'hud comp';
         t.className = 'hud-text_content text-running';
         document.getElementById('canvas').classList.remove('hidden');
-        document.getAnimations('log').classList.remove('hidden');
+        document.getElementById('log').classList.remove('hidden');
         is_tools_show = false;
         //mylog(''); 
     }
@@ -1147,42 +1159,15 @@ function write_lat_lng(place_id, local) {
     hiddenLoading();
   }
 
-  async function bd_city(){
-    url = 'https://api.bigdatacloud.net/data/reverse-geocode?latitude=-34.93129&longitude=138.59669&localityLanguage=en&key='+bigdata.key;
+  async function bd_city(lat, lng){
+    lat = lat || config.map.lat;
+    lng = lng || config.map.lng;
+
+    url = 'https://api.bigdatacloud.net/data/reverse-geocode?latitude='+lat+'&longitude='+lng+'&localityLanguage=vi&key='+bigdata.key;
     const response = await fetch(url);
     const data = await response.json();
 
     const plusCode = data.plusCode || 0;
     const city = data.city || '';
-
-  }
-
-  var rs ,ss
-  async function test_C(){
-    
-    /* Initialise Reverse Geocode API Client */
-    var reverseGeocoder=new BDCReverseGeocode();
-    
-    /* Get the current user's location information, based on the coordinates provided by their browser */
-    /* Fetching coordinates requires the user to be accessing your page over HTTPS and to allow the location prompt. */
-    reverseGeocoder.getClientLocation(function(result) {
-        console.log(result);
-    });
-
-    /* Get the administrative location information using a set of known coordinates */
-    reverseGeocoder.getClientLocation({
-        latitude: -33.8688,
-        longitude: 151.2093,
-    },function(result) {
-      rs=result;//  console.log(result);
-    });
-
-    /* You can also set the locality language as needed */
-    reverseGeocoder.localityLanguage='vi';
-
-    /* Request the current user's coordinates (requires HTTPS and acceptance of prompt) */
-    reverseGeocoder.getClientCoordinates(function(result) {
-    ss=result;    console.log(result);
-    });
 
   }
