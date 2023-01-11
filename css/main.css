@@ -615,3 +615,19 @@ footer {
 #map.reverse{
     transform: scale(-1);
 }
+
+.hud.plus_codes{
+    left: 0;
+    top:0
+}
+.hud.hud.plus_codes #if_plus_codes{
+    width: 98vw;
+    height: 40vh;
+    opacity: 1;
+}
+
+.hud.plus_codes #if_plus_codes.full{
+    width: 100vw;
+    height: 95vh;
+    opacity: 1;
+}

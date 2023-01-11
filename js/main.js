@@ -1089,6 +1089,22 @@ function update_tools(){
     }
 }
 
+var is_plus_codes = false;
+function update_pluscodes(){
+
+    if(is_plus_codes === false){
+
+        document.getElementById('if_plus_codes').classList.add('full');
+        is_plus_codes = true;
+    }
+    else{
+
+        document.getElementById('if_plus_codes').classList.remove('full');
+
+        is_plus_codes = false;
+    }
+}
+
 var is_save_mode = false;
 function saveBookMark(){
     if(is_save_mode === false){
