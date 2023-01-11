@@ -348,7 +348,7 @@ ion-icon {
     border-radius: 5px;
 }
 
-body {
+html, body {
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -532,6 +532,7 @@ footer {
 }
 
 #log {
+    display: none !important;
     background: aliceblue;
     color: blue;
     padding: 0 10px;
@@ -619,7 +620,9 @@ footer {
 
 .hud.plus_codes{
     left: 0;
-    top:0
+    top:0;
+    width: fit-content;
+    height: fit-content;
 }
 
 .hud.plus_codes.no-action{
