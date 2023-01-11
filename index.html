@@ -83,7 +83,7 @@
 </main>
 <footer id="footer">
     <div class="navigation">
-        <ul>
+        <ul id="ui-menu">
             <li class="list">
                 <a href="javascript:void(0);" id="sw-planet" onclick="updateTitlePlanet();">
                 <span class="icon">
@@ -196,8 +196,8 @@
         </ul>
     </div>
 </footer>
-<div class="hud plus_codes">
-    <iframe id="if_plus_codes" src="https://plus.codes/7P28QPJ2+P6" allowtransparency="true" frameborder="0" scrolling="no"></iframe>
+<div class="hud plus_codes no-action" id="iframe_pluscodes">
+    <div id="if_plus_codes"></div>
 </div>
 <div class="hud comp">
     <img width="100" class="bg" src="https://uhpdgames.github.io/ixdbiker/images/com.png">
@@ -205,11 +205,19 @@
 </div>
 <div class="hud" style="bottom: 5px; font-size: .65em;left:5px;display: flex;width: fit-content;z-index: 9999999999999;">
     <a style="border: 2px solid; border-radius: 30px;" href="javascript:void(0)" onclick="update_pluscodes();">
-        <span class="icon"><ion-icon name="code-outline"></ion-icon></span>
+        <span class="icon"><ion-icon name="code-outline"></ion-icon></span></a>
         <a style="margin-left: 5px; border: 2px solid; border-radius: 30px;" href="javascript:void(0)" onclick="update_tools();">
-            <span class="icon"><ion-icon name="close-circle-outline"></ion-icon></span>
-</div>
+            <span class="icon"><ion-icon name="close-circle-outline"></ion-icon></span></a>
+            <a style="margin-left: 5px; border: 2px solid; border-radius: 30px;" href="javascript:void(0)" onclick="createMapIF();">
+                <span class="icon"> <ion-icon name="log-out-outline"></ion-icon></span></a>
+           
 
+                
+</div>
+<div class="hud" style="right: 5px;top:0">
+    <a style="color:red;" href="javascript:void(0)" onclick="removePlusCodesMap();">
+        <span class="icon"><ion-icon name="close-circle-outline"></ion-icon></span></a>
+</div>
 <div class="hud-text f-hud">
     
     <div class="hud-text_content text-running">

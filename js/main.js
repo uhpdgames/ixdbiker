@@ -244,8 +244,47 @@ setTimeout(function () {
 
     map.on('click', onMapClick);
 
-}, 1000);
+   
+  
 
+    var mql = window.matchMedia("(orientation: portrait)");
+ 
+    
+    var t = document.querySelector('.leaflet-top.leaflet-left');
+ // Add a media query change listener
+ if(mql.matches) {  
+     t.className = 'leaflet-top leaflet-left';
+     document.getElementById('footer').classList.remove('landscape');
+     document.getElementById('ui-menu').classList.remove('landscape');
+     document.getElementById('preloader').classList.remove('landscape');
+ } else {  
+    is_landscape = true;
+    document.getElementById('preloader').classList.add('landscape');
+     t.className = 'leaflet-top leaflet-left landscape';
+     document.getElementById('footer').classList.add('landscape');
+     document.getElementById('ui-menu').classList.add('landscape');
+ }
+   
+ mql.addListener(function(m) {
+     if(m.matches) {
+         // Changed to portrait
+         t.className = 'leaflet-top leaflet-left';
+         document.getElementById('footer').classList.remove('landscape');
+         document.getElementById('ui-menu').classList.remove('landscape');
+         document.getElementById('preloader').classList.remove('landscape');
+     }
+     else {
+        is_landscape = true;
+         // Changed to landscape
+         t.className = 'leaflet-top leaflet-left landscape';
+         document.getElementById('footer').classList.add('landscape');
+         document.getElementById('ui-menu').classList.add('landscape');
+         document.getElementById('preloader').classList.add('landscape');
+     }
+ });
+ 
+}, 1000);
+var is_landscape = false;
 const firebaseConfig = {
     apiKey: "AIzaSyAUYwRPOsJnD4TDykRVcLNqcfCp9ztKbI8",
     authDomain: "ungdang-ixd.firebaseapp.com", 
@@ -802,7 +841,40 @@ async function updateWeather_2(lat, long) {
     );
 }
 
+function createMapIF(code_ = null){
+    if(code_ == null){
+        code_ = config.map.place_id;
+    }
 
+   // code_ = code_ || config.map.place_id;
+
+    document.getElementById('if_plus_codes').remove();
+
+    const iframe = document.createElement("iframe");
+    iframe.setAttribute("id", "if_plus_codes");
+    iframe.setAttribute("allowtransparency", "true");
+    iframe.setAttribute("frameborder", "0");
+    iframe.setAttribute("scrolling", "1");
+
+
+    // Find matches
+var mql = window.matchMedia("(orientation: portrait)");
+
+// If there are matches, we're in portrait
+if(mql.matches) {  
+	document.getElementById('iframe_pluscodes').classList.add('portrait');
+} else {  
+	document.getElementById('iframe_pluscodes').classList.add('landscape');
+}
+  
+
+
+
+iframe.style.display = "block";
+iframe.src ='https://plus.codes/'+ code_;
+document.getElementById('iframe_pluscodes').appendChild(iframe);
+
+}
 config.map.place_id = 0;
 config.map.google_geo_map = '';
 async function getLocalName(lat = null, lng = null) {
@@ -827,6 +899,8 @@ async function getLocalName(lat = null, lng = null) {
 
 
     sleep(125);
+
+    createMapIF(code_);
 
     //const code = data.plus_code || {};
 
@@ -1066,20 +1140,26 @@ function rec_trigger(){
 var is_tools_show = false;
 function update_tools(){
     var d = document.querySelector('.leaflet-top.leaflet-left');
-    var f = document.querySelector('footer');
+    var f = document.getElementById('footer');
     var t = document.querySelector('.hud-text_content.text-running');
     var c = document.querySelector('.hud.comp');
     if(is_tools_show === false){ 
         d.className = 'leaflet-top leaflet-left hidden';  
-        f.className = 'hidden';
+        f.classList.add('hidden');
         c.className = 'hud comp hidden';
         t.className = 'hud-text_content text-running hidden';
         document.getElementById('canvas').classList.add('hidden');
         document.getElementById('log').classList.add('hidden');
+
+        removePlusCodesMap();
+
         is_tools_show = true;
     }else{ 
-        d.className = 'leaflet-top leaflet-left';
-        f.className = 'footer';
+        if(is_landscape) d.className = 'leaflet-top leaflet-left landscape';
+        else d.className = 'leaflet-top leaflet-left';
+        f.classList.add('footer');
+        if(is_landscape) f.classList.add('landscape');
+        f.classList.remove('hidden');
         c.className = 'hud comp';
         t.className = 'hud-text_content text-running';
         document.getElementById('canvas').classList.remove('hidden');
@@ -1095,10 +1175,12 @@ function update_pluscodes(){
     if(is_plus_codes === false){
 
         document.getElementById('if_plus_codes').classList.add('full');
+
+        document.getElementById('iframe_pluscodes').classList.remove('no-action');
         is_plus_codes = true;
     }
     else{
-
+        document.getElementById('iframe_pluscodes').classList.add('no-action');
         document.getElementById('if_plus_codes').classList.remove('full');
 
         is_plus_codes = false;
@@ -1187,3 +1269,14 @@ function write_lat_lng(place_id, local) {
     const city = data.city || '';
 
   }
+
+function removePlusCodesMap(){
+            document.getElementById('if_plus_codes').remove();
+
+            const iframe = document.createElement("div");
+            iframe.setAttribute("id", "if_plus_codes"); 
+            
+            iframe.style.display = "none";
+            document.getElementById('iframe_pluscodes').appendChild(iframe);
+
+}

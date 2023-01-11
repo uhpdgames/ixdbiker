@@ -467,6 +467,7 @@ footer {
     display: block;
 }
 .hud.comp{
+    display: none;
     left: 5px;
     top: 145px;
     width: fit-content;
@@ -488,7 +489,7 @@ footer {
     transform: translateX(20%);
     user-select: none;
     pointer-events: none;
-    height: 25em;
+    height: 20em;
     opacity: .75;
     bottom: 3em;
     position: fixed;
@@ -620,14 +621,65 @@ footer {
     left: 0;
     top:0
 }
+
+.hud.plus_codes.no-action{
+    user-select: none;
+    pointer-events: none;
+}
+
 .hud.hud.plus_codes #if_plus_codes{
-    width: 98vw;
-    height: 40vh;
+    width: 100vw;
+    height: 18vh;
     opacity: 1;
 }
 
 .hud.plus_codes #if_plus_codes.full{
-    width: 100vw;
-    height: 95vh;
+    width: 100vw !important;
+    height: 95vh !important;
+    margin: 0;
+    padding: 0;
     opacity: 1;
+}
+
+.hud.plus_codes.landscape{
+    bottom: 2rem;
+    right: 0;
+    left: unset;
+    top:unset;
+}
+.hud.plus_codes.landscape #if_plus_codes{
+    width: 40vw;
+    height: 50vh;
+
+}
+
+#ui-menu.landscape{
+
+    flex-direction: row-reverse;
+    width: fit-content;
+    height: fit-content;
+}
+#footer.landscape{
+    bottom: unset;
+    top:3rem;
+
+}
+
+.leaflet-top.leaflet-left.landscape{
+left: 0;
+right: unset;
+top:6rem;
+opacity: .5;
+
+}
+
+.hud.plus_codes.no-action #search-container-outer,
+.hud.plus_codes.no-action #summary-container-outer,
+.hud.plus_codes.no-action  #map-controls
+{
+    display: none !important;
+}
+
+#preloader.landscape{
+    background-size: 62% !important;
 }
